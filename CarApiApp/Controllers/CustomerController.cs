@@ -38,6 +38,32 @@ namespace CarApiApp.Controllers
             await _customerRepository.AddAsync(newCustomer);
             return Ok(customer);   
         }
-       
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Customer>> GetById(int id)
+        {
+            var customer = await _customerRepository.GetByIdAsync(id);
+            return Ok(customer);
+        }
+        /// <summary>
+        /// end point for update
+        /// </summary>
+        /// <param name="cutomer"></param>
+        /// <param name="id"></param>
+        /// <returns>updated customer</returns>
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Customer>> Update(CustomerForCreate customer, int id)
+        {
+            var existingcustomer = await _customerRepository.GetByIdAsync(id);
+            if (existingcustomer == null)
+            {
+                return NotFound();
+            }
+            existingcustomer.Name = customer.Name;
+            existingcustomer.Address = customer.Address;
+            existingcustomer.Age = customer.Age;
+ 
+            await _customerRepository.UpdateAsync(existingcustomer);
+            return Ok(existingcustomer);
+        }
     }
 }

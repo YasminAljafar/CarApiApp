@@ -36,5 +36,32 @@ namespace CarApiApp.Controllers
             return Ok(supplier);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Supplier>> GetById(int id)
+        {
+            var supplier = await _suppliersRepository.GetByIdAsync(id);
+            return Ok(supplier);
+        }
+        /// <summary>
+        /// end point for update
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <param name="id"></param>
+        /// <returns>updated supplier</returns>
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Supplier>> Update(SupplierForCreate supplier, int id)
+        {
+            var existingSupplier = await _suppliersRepository.GetByIdAsync(id);
+            if (existingSupplier == null)
+            {
+                return NotFound();
+            }
+            existingSupplier.Name = supplier.Name;
+            existingSupplier.Address = supplier.Address;
+
+            await _suppliersRepository.UpdateAsync(existingSupplier);
+            return Ok(existingSupplier);
+        }
+
     }
 }

@@ -25,9 +25,9 @@ namespace CarApiApp.Services
            return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity?> GetByIdAsync(int id)
         {
-            var car = await _context.Set<TEntity>().FirstOrDefaultAsync();
+            var car = await _context.Set<TEntity>().SingleOrDefaultAsync();
             return car;
         }
 

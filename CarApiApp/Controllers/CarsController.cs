@@ -51,7 +51,7 @@ namespace CarApiApp.Controllers
         /// <param name="id"></param>
         /// <returns>updated car</returns>
         [HttpPut("{id}")]
-        public async Task<ActionResult<Car>> Update(CarForUpdate car, int id)
+        public async Task<ActionResult<Car>> Update(CarForCreate car, int id)
         {
             var existingcar= await _carRepository.GetByIdAsync(id);
             if (existingcar == null)
@@ -63,8 +63,7 @@ namespace CarApiApp.Controllers
             existingcar.Gear = car.Gear;
             existingcar.Model = car.Model;
             await _carRepository.UpdateAsync(existingcar);
-            return NoContent();
-
+            return Ok(existingcar);
         }
     }
 }

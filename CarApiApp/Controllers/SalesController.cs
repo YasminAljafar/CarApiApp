@@ -37,5 +37,32 @@ namespace CarApiApp.Controllers
             return Ok(sale);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Sale>> GetById(int id)
+        {
+            var sale = await _saleRepository.GetByIdAsync(id);
+            return Ok(sale);
+        }
+        /// <summary>
+        /// end point for update
+        /// </summary>
+        /// <param name="sale"></param>
+        /// <param name="id"></param>
+        /// <returns>updated sale</returns>
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Sale>> Update(SaleForCreate sale, int id)
+        {
+            var existingsale = await _saleRepository.GetByIdAsync(id);
+            if (existingsale == null)
+            {
+                return NotFound();
+            }
+            existingsale.total = sale.total;
+            existingsale.CarId = sale.CarId;
+            existingsale.CustomerId= sale.CustomerId;
+
+            await _saleRepository.UpdateAsync(existingsale);
+            return Ok(existingsale);
+        }
     }
 }
