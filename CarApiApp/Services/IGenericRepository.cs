@@ -7,7 +7,7 @@
         //public Task<T> UpdatePartialAsync<T>(T t);
         public Task<List<TEntity>> GetAllAsync();
         public Task<TEntity?> GetByIdAsync(int id);
-        //public bool DeleteAsync<T>(int id);
+        public Task<TEntity> DeleteAsync(int id);
 
     }
 }

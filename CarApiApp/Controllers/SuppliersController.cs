@@ -63,5 +63,12 @@ namespace CarApiApp.Controllers
             return Ok(existingSupplier);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Supplier>> Delete(int id)
+        {
+            var supplier = _suppliersRepository.DeleteAsync(id);
+            return Ok(supplier);
+        }
+
     }
 }

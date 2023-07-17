@@ -20,6 +20,14 @@ namespace CarApiApp.Services
            await _context.SaveChangesAsync();
         }
 
+        public async Task<TEntity> DeleteAsync(int id)
+        {
+            var x = await _context.Set<TEntity>().SingleOrDefaultAsync();
+                _context.Remove(x);
+                await _context.SaveChangesAsync();
+                return x;
+        }
+
         public async Task<List<TEntity>> GetAllAsync()
         {
            return await _context.Set<TEntity>().ToListAsync();
@@ -27,8 +35,8 @@ namespace CarApiApp.Services
 
         public async Task<TEntity?> GetByIdAsync(int id)
         {
-            var car = await _context.Set<TEntity>().SingleOrDefaultAsync();
-            return car;
+            var x = await _context.Set<TEntity>().SingleOrDefaultAsync();
+            return x;
         }
 
         public async Task<bool> UpdateAsync(TEntity entity)

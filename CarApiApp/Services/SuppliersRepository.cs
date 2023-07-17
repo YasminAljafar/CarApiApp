@@ -16,5 +16,13 @@ namespace CarApiApp.Services
             var supplier = await _context.Set<Supplier>().SingleOrDefaultAsync(s=>s.Id==id);
             return supplier;
         }
+
+      new public async Task<Supplier> DeleteAsync(int id)
+        {
+            var x = await _context.Set<Supplier>().SingleOrDefaultAsync(s=>s.Id==id);
+            _context.Remove(x);
+            await _context.SaveChangesAsync();
+            return x;
+        }
     }
 }
