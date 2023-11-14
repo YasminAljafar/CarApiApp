@@ -66,8 +66,8 @@ namespace CarApiApp.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Supplier>> Delete(int id)
         {
-            var supplier = _suppliersRepository.DeleteAsync(id);
-            return Ok(supplier);
+            var supplier = await _suppliersRepository.DeleteAsync(id);
+            return Ok(supplier +"has deleted");
         }
 
     }

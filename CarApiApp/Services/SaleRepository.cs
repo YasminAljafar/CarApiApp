@@ -16,5 +16,13 @@ namespace CarApiApp.Services
             var sale = await _context.Set<Sale>().SingleOrDefaultAsync(s=>s.Id==id);
             return sale;
         }
+
+        new public async Task<Sale> DeleteAsync(int id)
+        {
+            var x = await _context.Set<Sale>().SingleOrDefaultAsync(s => s.Id == id);
+            _context.Remove(x);
+            await _context.SaveChangesAsync();
+            return x;
+        }
     }
 }

@@ -65,5 +65,12 @@ namespace CarApiApp.Controllers
             await _carRepository.UpdateAsync(existingcar);
             return Ok(existingcar);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Car>> Delete(int id)
+        {
+            var car = await _carRepository.DeleteAsync(id);
+            return Ok( "has deletd");
+        }
     }
 }

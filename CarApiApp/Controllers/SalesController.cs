@@ -65,12 +65,14 @@ namespace CarApiApp.Controllers
             return Ok(existingsale);
         }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-          
-        //    var sale = _saleRepository.DeleteAsync(id);
-        //    return Ok(sale);
-        //}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Sale>> Delete(int id)
+        {
+
+            var sale = await _saleRepository.DeleteAsync(id);
+            return Ok(sale+"has deleted");
+        }
+
+        
     }
 }

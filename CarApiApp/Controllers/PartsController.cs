@@ -70,5 +70,12 @@ namespace CarApiApp.Controllers
             await _partRepository.UpdateAsync(existingpart);
             return Ok(existingpart);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Part>> Delete(int id)
+        {
+            var part = await _partRepository.DeleteAsync(id);
+            return Ok(part +"has deletd");
+        }
     }
 }
